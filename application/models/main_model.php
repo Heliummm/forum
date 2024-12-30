@@ -23,7 +23,6 @@ public function get_comments($post_id) {
 public function get_artworks() {
     return $this->db->get('gallery')->result_array();
 }
-
 public function save_artwork($data) {
     if (!$this->db->insert('gallery', $data)) {
         log_message('error', 'Database error: ' . $this->db->error());
@@ -31,6 +30,7 @@ public function save_artwork($data) {
     }
     return true;
 }
+
 
 public function upload_artwork() {
         $data['title'] = 'Unggah Karya';
@@ -55,7 +55,7 @@ public function upload_artwork() {
                     'created_at' => date('Y-m-d H:i:s')
                 ];
 
-                if ($this->Main_model->save_artwork($artwork_data)) {
+                if ($this->ain_model->save_artwork($artwork_data)) {
                     $this->session->set_flashdata('success', 'Karya berhasil diunggah!');
                     redirect('index.php/main/gallery');
                 } else {
@@ -94,7 +94,7 @@ public function check_user($email, $password) {
         if (password_verify($password, $user['password'])) {
             return [
                 'user_id' => $user['id'],
-                'username' => $user['username'],
+                'name' => $user['name'],
                 'email' => $user['email']
             ];
         }
@@ -108,36 +108,28 @@ public function insert_user($data) {
 public function get_user_by_id($id) {
     return $this->db->get_where('users', ['id' => $id])->row_array();
 }
-// Ambil semua data
-public function get_all()
-{
-    return $this->db->get('communities')->result_array();
+
+
+// Menambahkan komunitas baru
+public function insert_community($data) {
+    $this->db->insert('communities', $data);
 }
 
-// Ambil data berdasarkan ID
-public function get_by_id($id)
-{
+// Mendapatkan satu komunitas berdasarkan ID
+public function get_community_by_id($id) {
     return $this->db->get_where('communities', ['id' => $id])->row_array();
 }
 
-// Tambah data
-public function insert($data)
-{
-    return $this->db->insert('communities', $data);
+// Memperbarui komunitas
+public function update_community($id, $data) {
+    $this->db->where('id', $id);
+    $this->db->update('communities', $data);
 }
 
-// Update data
-public function update($id, $data)
-{
+// Menghapus komunitas
+public function delete_community($id) {
     $this->db->where('id', $id);
-    return $this->db->update('communities', $data);
-}
-
-// Hapus data
-public function delete($id)
-{
-    $this->db->where('id', $id);
-    return $this->db->delete('communities');
+    $this->db->delete('communities');
 }
 }
 ?>

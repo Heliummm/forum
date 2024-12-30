@@ -25,7 +25,7 @@ class Main extends CI_Controller {
 
         if ($this->input->post()) {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('password_hash', 'Password', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
 
             if ($this->form_validation->run() === TRUE) {
                 $email = $this->input->post('email');
@@ -134,58 +134,22 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function index()
-    {
-        // Ambil daftar komunitas
-        $data['communities'] = $this->community_model->get_all_communities();
-    
-        // Ambil daftar kategori
-        $data['categories'] = $this->community_model->get_categories();
-    
-        // Load view
-        $this->load->view('community_list', $data);
-    }
-    
-    public function create()
-    {
-        // Validasi form
-        $this->form_validation->set_rules('name', 'Community Name', 'required');
-        $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('category_id', 'Category', 'required');
-    
-        if ($this->form_validation->run() == FALSE) {
-            $response = [
-                'success' => false,
-                'message' => validation_errors()
-            ];
-            echo json_encode($response);
-            return;
+    public function create_community() {
+        if ($this->input->post()) {
+            $create = $this->Main_model->create_community();
+            if ($create) {
+                $this->session->set_flashdata('success', 'Komunitas berhasil dibuat!');
+            } else {
+                $this->session->set_flashdata('error', 'Terjadi kesalahan saat membuat komunitas.');
+            }
+            redirect('main/community');
         }
-    
-        // Ambil data dari form
-        $communityData = [
-            'name' => $this->input->post('name'),
-            'description' => $this->input->post('description'),
-            'category_id' => $this->input->post('category_id')
-        ];
-    
-        // Simpan ke database
-        if ($this->community_model->insert_community($communityData)) {
-            $response = [
-                'success' => true,
-                'community' => $communityData
-            ];
-            echo json_encode($response);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => 'Failed to add community.'
-            ];
-            echo json_encode($response);
-        }
+
+        $data['title'] = 'Buat Komunitas';
+        $this->load->view('templates/header', $data);
+        $this->load->view('community/create', $data);
+        $this->load->view('templates/footer');
     }
-    
-    
     public function community_list() {
         $data['title'] = 'Daftar Komunitas';
         $data['communities'] = $this->Main_model->get_communities();
