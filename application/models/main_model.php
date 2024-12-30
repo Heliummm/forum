@@ -24,6 +24,13 @@ public function get_artworks() {
     return $this->db->get('gallery')->result_array();
 }
 
+public function save_artwork($data) {
+    if (!$this->db->insert('gallery', $data)) {
+        log_message('error', 'Database error: ' . $this->db->error());
+        return false;
+    }
+    return true;
+}
 
 public function upload_artwork() {
         $data['title'] = 'Unggah Karya';
@@ -48,7 +55,7 @@ public function upload_artwork() {
                     'created_at' => date('Y-m-d H:i:s')
                 ];
 
-                if ($this->main_model->save_artwork($artwork_data)) {
+                if ($this->Main_model->save_artwork($artwork_data)) {
                     $this->session->set_flashdata('success', 'Karya berhasil diunggah!');
                     redirect('index.php/main/gallery');
                 } else {
@@ -87,7 +94,7 @@ public function check_user($email, $password) {
         if (password_verify($password, $user['password'])) {
             return [
                 'user_id' => $user['id'],
-                'name' => $user['name'],
+                'username' => $user['username'],
                 'email' => $user['email']
             ];
         }
@@ -100,6 +107,37 @@ public function insert_user($data) {
 }
 public function get_user_by_id($id) {
     return $this->db->get_where('users', ['id' => $id])->row_array();
+}
+// Ambil semua data
+public function get_all()
+{
+    return $this->db->get('communities')->result_array();
+}
+
+// Ambil data berdasarkan ID
+public function get_by_id($id)
+{
+    return $this->db->get_where('communities', ['id' => $id])->row_array();
+}
+
+// Tambah data
+public function insert($data)
+{
+    return $this->db->insert('communities', $data);
+}
+
+// Update data
+public function update($id, $data)
+{
+    $this->db->where('id', $id);
+    return $this->db->update('communities', $data);
+}
+
+// Hapus data
+public function delete($id)
+{
+    $this->db->where('id', $id);
+    return $this->db->delete('communities');
 }
 }
 ?>

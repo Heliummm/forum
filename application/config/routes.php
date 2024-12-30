@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['login'] = 'Main/auth/login';           // Route untuk halaman login
+$route['login'] = 'Main/login';           // Route untuk halaman login
 $route['register'] = 'Main/register';    // Route untuk halaman registrasi
 $route['logout'] = 'Main/logout';        // Route untuk logout
 $route['forum'] = 'Main/forum';          // Route untuk halaman forum diskusi
@@ -62,4 +62,10 @@ $route['gallery/upload'] = 'Main/upload_artwork';    // Route untuk unggah karya
 $route['gallery/(:num)'] = 'Main/gallery_detail/$1'; // Route untuk detail karya berdasarkan ID
 $route['forum/(:num)'] = 'Main/forum_category/$1';   // Route untuk kategori forum berdasarkan ID
 $route['profile'] = 'Main/profile';
+$route['community/create'] = 'community/create';
+$route['community/add/(:num)'] = 'community/add/$1';
+$route['community/create'] = 'community/create';
+$route['community/list'] = 'community/list'; // Ganti sesuai halaman daftar komunitas
+$route['community'] = 'community/index';
+$route['community/create'] = 'community/create';
 

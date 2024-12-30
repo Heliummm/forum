@@ -16,6 +16,20 @@
                 <p><?= $community['description']; ?></p>
             </li>
         <?php endforeach; ?>
+        <ul id="community-list">
+    <?php if (!empty($communities)) : ?>
+        <?php foreach ($communities as $community) : ?>
+            <li>
+                <strong><?= htmlspecialchars($community['name']) ?></strong><br>
+                <?= htmlspecialchars($community['description']) ?><br>
+                <em>Category: <?= htmlspecialchars($community['category_name']) ?></em>
+            </li>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <p>No communities found.</p>
+    <?php endif; ?>
+</ul>
+
     </ul>
 </body>
 </html>
