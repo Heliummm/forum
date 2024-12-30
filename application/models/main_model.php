@@ -117,18 +117,18 @@ public function insert_community($data) {
 
 // Mendapatkan satu komunitas berdasarkan ID
 public function get_community_by_id($id) {
-    return $this->db->get_where('communities', ['id' => $id])->row_array();
+    return $this->db->get_where('communities', ['community_id' => $id])->row_array();
 }
 
 // Memperbarui komunitas
 public function update_community($id, $data) {
-    $this->db->where('id', $id);
+    $this->db->where('community_id', $id);
     $this->db->update('communities', $data);
 }
 
 // Menghapus komunitas
 public function delete_community($id) {
-    $this->db->where('id', $id);
+    $this->db->where('community_id', $id);
     $this->db->delete('communities');
 }
 }

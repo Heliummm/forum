@@ -20,8 +20,8 @@
                     <td><?php echo $community['description']; ?></td>
                     <td><?php echo $community['created_at']; ?></td>
                     <td>
-                        <a href="<?php echo site_url('main/edit_community/' . $community['id']); ?>" class="btn btn-warning">Edit</a>
-                        <a href="<?php echo site_url('main/delete_community/' . $community['id']); ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
+                        <a href="<?php echo site_url('main/edit_community/' . $community['community_id']); ?>" class="btn btn-warning">Edit</a>
+                        <a href="<?php echo site_url('main/delete_community/' . $community['community_id']); ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

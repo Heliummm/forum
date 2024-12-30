@@ -10,7 +10,7 @@ class Community_model extends CI_Model
     // Ambil data berdasarkan ID
     public function get_by_id($id)
     {
-        return $this->db->get_where('communities', ['id' => $id])->row_array();
+        return $this->db->get_where('communities', ['community_id' => $id])->row_array();
     }
 
     // Tambah data
@@ -22,14 +22,14 @@ class Community_model extends CI_Model
     // Update data
     public function update($id, $data)
     {
-        $this->db->where('id', $id);
+        $this->db->where('community_id', $id);
         return $this->db->update('communities', $data);
     }
 
     // Hapus data
     public function delete($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('community_id', $id);
         return $this->db->delete('communities');
     }
 }

@@ -62,10 +62,9 @@ $route['gallery/upload'] = 'Main/upload_artwork';    // Route untuk unggah karya
 $route['gallery/(:num)'] = 'Main/gallery_detail/$1'; // Route untuk detail karya berdasarkan ID
 $route['forum/(:num)'] = 'Main/forum_category/$1';   // Route untuk kategori forum berdasarkan ID
 $route['profile'] = 'Main/profile';
-$route['community/create'] = 'community/create';
+$route['community/create'] = 'Community/create';
 $route['community/add/(:num)'] = 'community/add/$1';
-$route['community/create'] = 'community/create';
+$route['community/edit/(:num)'] = 'community/edit/$1';
 $route['community/list'] = 'community/list'; // Ganti sesuai halaman daftar komunitas
 $route['community'] = 'community/index';
-$route['community/create'] = 'community/create';
 

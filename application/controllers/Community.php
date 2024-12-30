@@ -7,6 +7,7 @@ class Community extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Community_model');
+		$this->load->helper(array('form','url'));
     }
 
     // Tampilkan semua data
@@ -28,9 +29,10 @@ class Community extends CI_Controller
             $data = [
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
+				'created_by' => 1,
             ];
             $this->Community_model->insert($data);
-            redirect('community');
+            redirect('main/community');
         }
     }
 
@@ -52,9 +54,10 @@ class Community extends CI_Controller
             $update_data = [
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
+				'created_by' => 1,
             ];
             $this->Community_model->update($id, $update_data);
-            redirect('community');
+            redirect('main/community_list');
         }
     }
 
